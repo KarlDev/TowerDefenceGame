@@ -7,31 +7,46 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 
-import karl.indie.map.MapStage;
+import karl.indie.map.stage.MapStage;
+import karl.indie.map.stage.TiledMapTileActor;
 import karl.indie.units.Unit;
 
 /**
  * Created by Karl on 17.09.2016.
  */
 public class TowerActor extends Actor {
-    private String txtPath = "Tower.png";
-    private String missleTexturePath = "DefaultMisle.png";
+    private TiledMapTileActor tileActor;
     private AssetManager am;
+
+    private String txtPath = "Tower.png";
+    float drawX, drawY;
+    private String missleTexturePath = "DefaultMisle.png";
+
     float atkSpeed;
     float sinceAtk;
     float range;
     int dmg;
 
-    public TowerActor(Vector2 pos, AssetManager am) {
-        this.am = am;
+    public TowerActor(TiledMapTileActor tileActor, String txtPath) {
+        this.tileActor = tileActor;
+        this.txtPath = txtPath;
+
+        //Get ASsetmanager
+        am = ((MapStage)tileActor.getStage()).game.assManager;
+        //check if txt is rly loaded..
         if(!am.isLoaded(txtPath)){
             am.load(txtPath, Texture.class);
             am.finishLoading();
         }
-        setPosition(pos.x, pos.y);
 
+        //BOUNDS
+        drawX=tileActor.getX();
+        drawY=tileActor.getY();
+        setBounds(tileActor.getX() + 16, tileActor.getY() + 16, tileActor.getWidth(), tileActor.getHeight());
+
+
+        //STATS
         atkSpeed = 0.8f;
         sinceAtk = 0;
         range = 50;
@@ -40,7 +55,7 @@ public class TowerActor extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(am.get(txtPath, Texture.class), getX(), getY());
+        batch.draw(am.get(txtPath, Texture.class), drawX, drawY);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package karl.indie.units;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -9,9 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.Array;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-
-import karl.indie.map.MapStage;
+import karl.indie.map.stage.MapStage;
 
 
 /**

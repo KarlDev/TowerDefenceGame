@@ -1,9 +1,11 @@
-package karl.indie.map;
+package karl.indie.map.stage;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.utils.Array;
 
 import karl.indie.TowerGame;
@@ -13,7 +15,7 @@ import karl.indie.units.Unit;
  * Created by Karl on 17.09.2016.
  */
 public class MapStage extends Stage {
-    private TowerGame game;
+    public TowerGame game;
     private TiledMap map;
     private Array<direction> path;
 
@@ -24,11 +26,12 @@ public class MapStage extends Stage {
     public MapStage(TowerGame game, TiledMap map) {
         this.game = game;
         this.map = map;
+        loadTileActors();
 
         unitGroup = new Group();
         unitGroup.setName("unitGroup");
         addActor(unitGroup);
-        //addListener(new TowerPlacer(this));
+
 
         setPath();
         //spawnUnit();
@@ -43,6 +46,18 @@ public class MapStage extends Stage {
         super.act(delta);
     }
 
+    private void loadTileActors(){
+        TiledMapTileLayer l = (TiledMapTileLayer)this.map.getLayers().get("textureLayer");
+        float tileHeight = l.getTileHeight(), tileWidth = l.getTileWidth();
+        System.out.println(l.getName());
+        for(int x = 0; x < l.getWidth() - 1; x++) {
+            for(int y = 0; y < l.getHeight() - 1; y++) {
+                TiledMapTileActor actor = new TiledMapTileActor(map, l, l.getCell(x, y));
+                actor.setBounds(tileWidth * x, tileHeight * y, tileWidth, tileHeight);
+                addActor(actor);
+            }
+        }
+    }
     public void spawnUnit(float delta) {
         timeSinceUnit += delta;
         if(timeSinceUnit < 2.5f) return;

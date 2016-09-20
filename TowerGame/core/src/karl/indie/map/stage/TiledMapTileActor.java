@@ -4,7 +4,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import karl.indie.map.Tower.TowerActor;
@@ -26,9 +25,6 @@ public class TiledMapTileActor extends Actor {
     }
 
     public void buildTower() {
-        Button but = new Button();
-        but.setBounds(getX() - 48, getY() - 48, getWidth(), getHeight());
-        getStage().addActor(but);
         getStage().addActor(new TowerActor(this, "Tower2.png"));
     }
     public class TileActorListener extends ClickListener {

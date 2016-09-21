@@ -27,6 +27,7 @@ public class TiledMapTileActor extends Actor {
     public void buildTower() {
         getStage().addActor(new TowerActor(this, "Tower2.png"));
     }
+
     public class TileActorListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import karl.indie.map.Tower.TowerActor;
+import karl.indie.map.Tower.TowerChooser;
 
 /**
  * Created by Karl on 21.09.2016.
@@ -15,7 +16,7 @@ public class TiledMapTileActor extends Actor {
     private TiledMap map;
     private TiledMapTileLayer layer;
     private TiledMapTileLayer.Cell cell;
-    private boolean towerBuilt = false;
+    public boolean towerBuilt = false;
 
     public TiledMapTileActor(TiledMap map, TiledMapTileLayer layer, TiledMapTileLayer.Cell cell) {
         this.map = map;
@@ -25,7 +26,8 @@ public class TiledMapTileActor extends Actor {
     }
 
     public void buildTower() {
-        getStage().addActor(new TowerActor(this, "Tower2.png"));
+        getStage().addActor(new TowerChooser(this));
+        //getStage().addActor(new TowerActor(this, "Tower2.png"));
     }
 
     public class TileActorListener extends ClickListener {

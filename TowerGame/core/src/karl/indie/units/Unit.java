@@ -53,6 +53,7 @@ public class Unit extends Actor {
                     action.addAction(Actions.moveBy(32f, 0f, speed));
             }
         }
+        action.addAction(Actions.removeActor());
         addAction(action);
     }
 

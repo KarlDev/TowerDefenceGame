@@ -3,6 +3,7 @@ package karl.indie.map.stage;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -44,6 +45,19 @@ public class MapStage extends Stage {
         spawnUnit(delta);
 
         super.act(delta);
+    }
+
+    public Actor getActorByName(String name) {
+        for(Actor a : getActors()) {
+            if(a.getName() == name) return a;
+        }
+        return null;
+    }
+
+    public boolean removeActorByName(String name) {
+        if(getActorByName(name) == null) return false;
+        getActorByName(name).remove();
+        return true;
     }
 
     private void loadTileActors(){
